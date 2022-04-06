@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<!--ctrl+shift+v to render preview-->
+
+<head>
+    <title>Profile page</title>
+
+</head>
+
+<body>
+    <header>Profile page of {{username}}</header>
+    <br><br><br><br>
+    <img src="{{ profile_pic }}" width="300" height="300">
+    <br><br><br><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+    <br><br><br><br>
+    <header>profile info: {{profile_info}}</header>
+    <br><br><br><br>
+    <form action="/updateprofileinfo" method="POST">
+        Update profile info:<br>
+        <input type="text" name="profileinfo" value=""><br>
+        <input type="submit" value="Update">
+
+
+    </form>
+    <br><br>
+    <div class="container">
+        <br><a href="/feed">Feed</a>
+    </div>
+    <br><br>
+    <div class="container">
+        <br><a href="/logout">log out</a>
+    </div>
+    <div class="container">
+        <br><a href="/passwordchange">change password</a>
+    </div>
+    <div class="container">
+        <br><a href="/updateprofilepic">change profile picture</a>
+    </div>
+
+</body>
+
+</html>

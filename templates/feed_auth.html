@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<!--ctrl+shift+v to render preview-->
+
+<body>
+    <h1>Feed</h1>
+    Hello {{user}} welcome to multiuser feed
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+    <br><br>
+    {% for post in posts %}
+    <li>-------------------------------------------------------------------</li>
+    {% if user == post.username %}
+    <form action="/feed_auth/delete/{{post.post_id}}" method="POST">
+        <input type="submit" name="delete" value="delete post">
+    </form>
+    <form action="/feed_auth/edit/{{post.post_id}}" method="POST" enctype="multipart/form-data">
+        Edit post:
+        Post theme:<br>
+        <input type="text" name="theme" value=""><br>
+        Text:<br>
+        <input type="text" name="text" value=""><br>
+        <br><br>
+        Picture:
+        <input type=file name=file>
+        <br><br>
+        <div>
+            <input type="checkbox" name="private" value="private">
+            private post (only authenticated users can see this post)</label>
+        </div>
+        <input type="submit" value="update">
+        <br><br>
+    </form>
+    {% endif %}
+    {% if post.private is not none %}
+    <li>{{ post.private }}</li>
+    {% endif %}
+    <li>post by {{ post.username }}</li>
+    <li>Theme: {{ post.feed_theme }}</li>
+    {% if post.picture is not none %}
+    <img src="{{ post.file_folder + post.picture }}" width="300" height="300">
+    {% endif %}
+    <li>{{ post.feed_text }}</li>
+    <li>-------------------------------------------------------------------</li>
+    <br><br><br><br>
+    {% endfor %}
+
+    <form action="/feed_auth" method="POST" enctype="multipart/form-data">
+        Post theme:<br>
+        <input type="text" name="theme" value=""><br>
+        Text:<br>
+        <input type="text" name="text" value=""><br>
+        <br><br>
+        Picture:
+        <input type=file name=file>
+        <br><br>
+        <div>
+            <input type="checkbox" name="private" value="private">
+            private post (only authenticated users can see this post)</label>
+        </div>
+        <input type="submit" value="post">
+        <br><br>
+    </form>
+
+    <div class="container">
+        <br><a href="/"> Log in here!</a>
+    </div>
+
+
+
+</body>
+
+</html>

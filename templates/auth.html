@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<!--ctrl+shift+v to render preview-->
+
+<head>
+    <title>Home work 2</title>
+</head>
+
+<body>
+    <header>Tarassov Nikita HW 2</header>
+    <h1>Log in!</h1>
+    <br><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+    <br><br>
+
+    <form action="/" method="POST">
+        Username:<br>
+        <input type="text" name="username" value=""><br>
+        Password:<br>
+        <input type="text" name="password" value=""><br>
+        <input type="submit" value="Log in">
+
+        <div class="container">
+            <br><a href="/signup">Sign up page</a>
+        </div>
+    </form>
+    <br><br>
+    <div class="container">
+        <br><a href="/feed">Feed</a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<!--ctrl+shift+v to render preview-->
+
+<body>
+    <h1>Update profile picture</h1>
+    <br><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+    <br><br>
+
+    <form action="/updateprofilepic" method="POST" enctype="multipart/form-data">
+        <input type=file name=file>
+        <input type=submit value=Upload>
+
+
+    </form>
+    <br><br><br>
+    <div class="container">
+        <br><a href="/profile">back to profile</a>
+    </div>
+</body>
+
+</html>

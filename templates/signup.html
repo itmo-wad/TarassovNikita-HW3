@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<!--ctrl+shift+v to render preview-->
+
+<body>
+    <h1>Sign up!</h1><br><br>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+    <br><br>
+
+
+    <form action="/signup" method="POST">
+        Username:<br>
+        <input type="text" name="username" value=""><br>
+        Password:<br>
+        <input type="text" name="password" value=""><br>
+
+        <input type="submit" value="Sign up">
+
+        <div class="container">
+            <br><a href="/">Already sing up? Log in here!</a>
+        </div>
+        <br><br><br>
+        <div class="container">
+            <br><a href="/feed">Feed</a>
+        </div>
+    </form>
+
+</body>
+
+</html>
